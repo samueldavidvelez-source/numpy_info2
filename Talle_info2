@@ -1,0 +1,175 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+x = np.linspace(0, 2*np.pi, 100)
+y_sin = np.sin(x)
+
+plt.plot(x, y_sin, linestyle='--', color='red')
+plt.title("Seno")
+plt.xlabel("x (radianes)")
+plt.ylabel("valor")
+
+plt.show()
+
+#----------------------------------------------------------------------
+x=np.linspace(0, 2*np.pi, 100)
+y_cos=np.cos(x)
+
+plt.plot(x, y_cos, linestyle='-', color='blue')
+plt.title("Coseno") 
+plt.xlabel("x (radianes)")
+plt.ylabel("valor")
+
+plt.show()
+
+#----------------------------------------------------------------------
+x = np.linspace(0, 2*np.pi, 100)
+y_sin = np.sin(x)
+y_cos = np.cos(x)
+
+plt.plot(x, y_sin, label='sin(x)')
+plt.plot(x, y_cos, label='cos(x)')
+plt.title("Seno y coseno")
+plt.xlabel("x (radianes)")
+plt.ylabel("valor")
+plt.legend()
+plt.show()
+
+
+#----------------------------------------------------------------------
+
+datos = 20 + 3 * np.random.randn(1000)
+
+plt.hist(datos, bins=50, density=True, color='pink')
+
+x = np.linspace(min(datos), max(datos), 100)
+curva = (1 / (3 * np.sqrt(2*np.pi))) * np.exp(-0.5 * ((x - 20) / 3) ** 2)
+plt.plot(x, curva, linestyle='--', color='magenta')
+
+plt.title("Histograma")
+plt.xlabel("Valor x")
+plt.ylabel("Probabilidad")
+plt.show()
+
+#----------------------------------------------------------------------
+x = np.linspace(-10, 10, 100)
+
+plt.plot(x, 2*x + 1, label='2x + 1')
+plt.plot(x, -x**2, label='-x^2')
+
+plt.title("Funciones en el mismo plano")
+plt.xlabel("x")
+plt.ylabel("y")
+plt.legend()
+plt.show()
+
+
+#----------------------------------------------------------------------
+
+"""
+Ejercicio:
+1. Crear un vector de tamaño 720 con valores aleatorios.
+2. Hacer reshape a (120, 6).
+3. Transponer la matriz y crear dos copias: una con order='F' y otra con order='C'.
+4. Generar un subplot con 6 paneles "a mano" (usando GridSpec), con proporciones diferentes.
+5. En cada panel graficar algo distinto (plot, scatter, bar, histograma, pie, boxplot),
+   usando cada fila de la matriz transpuesta como datos.
+6. Poner títulos, labels, leyendas y cuadrículas.
+"""
+
+
+# 1. Crear un vector de 720 valores aleatorios
+vector = np.random.randint(1, 101, 720)
+
+print("Vector:")
+print(vector)
+
+
+# 2.ambiar el tamaño del vector a una matriz de 120 x 6
+matriz = vector.reshape(120, 6)
+
+print("Matriz:")
+print(matriz)
+
+
+# hacer la transpuesta
+transpuesta = matriz.T
+
+print("Transpuesta:")
+print(transpuesta)
+
+
+# Crear dos copias de la transpuesta
+copia_F = np.array(transpuesta, order="F")
+copia_C = np.array(transpuesta, order="C")
+
+print("copia usando order F:")
+print(copia_F)
+
+print("copia usando order C:")
+print(copia_C)
+
+
+# 3. Crear una figura con 6 paneles
+plt.figure(figsize=(12, 8))
+
+# Panel 1
+plt.subplot(2, 3, 1)
+plt.plot(matriz[0])
+plt.title("Gráfico de líneas")
+plt.xlabel("Posición")
+plt.ylabel("Valor")
+plt.grid()
+plt.legend(["Fila 1"])
+
+
+# Panel 2
+plt.subplot(2, 3, 2)
+plt.scatter(range(6), matriz[1])
+plt.title("Scatter")
+plt.xlabel("Posición")
+plt.ylabel("Valor")
+plt.grid()
+plt.legend(["Fila 2"])
+
+
+# Panel 3
+plt.subplot(2, 3, 3)
+plt.bar(range(6), matriz[2])
+plt.title("Gráfico de barras")
+plt.xlabel("Posición")
+plt.ylabel("Valor")
+plt.grid()
+plt.legend(["Fila 3"])
+
+
+# Panel 4
+plt.subplot(2, 3, 4)
+plt.hist(matriz[3])
+plt.title("Histograma")
+plt.xlabel("Valor")
+plt.ylabel("Frecuencia")
+plt.grid()
+plt.legend(["Fila 4"])
+
+
+# Panel 5
+plt.subplot(2, 3, 5)
+plt.pie(matriz[4], labels=["1", "2", "3", "4", "5", "6"])
+plt.title("Gráfico circular")
+
+
+# Panel 6
+plt.subplot(2, 3, 6)
+plt.plot(matriz[5], marker="o")
+plt.title("Línea con puntos")
+plt.xlabel("Posición")
+plt.ylabel("Valor")
+plt.grid()
+plt.legend(["Fila 6"])
+
+
+# Mostrar los gráficos
+plt.tight_layout()
+plt.show()
+
